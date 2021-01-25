@@ -39,7 +39,6 @@ router.post('/', async (req, res) => {
 
   let genre = new Genre({ name: req.body.name })
   genre = await genre.save();
-  console.log('new element');
   res.send(genre);
 });
 
