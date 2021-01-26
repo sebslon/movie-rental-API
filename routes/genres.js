@@ -33,7 +33,7 @@ router.put('/:id', async (req, res) => {
     new: true
   })
 
-  if (!genre) return res.status(404).send('The genre with the given ID was not found.');
+  if (!genre) return res.status(404).send('Genre with the given ID was not found.');
 
   res.send(genre);
 });

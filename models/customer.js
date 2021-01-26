@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-const Customer = mongoose.model(
-  "Customer",
-  new mongoose.Schema({
+const Customer = mongoose.model("Customer", new mongoose.Schema({
     isGold: { type: Boolean, required: true, default: false },
     name: {
       type: String,
@@ -19,4 +17,4 @@ const Customer = mongoose.model(
   })
 );
 
-module.exports = Customer;
+exports.Customer = Customer;

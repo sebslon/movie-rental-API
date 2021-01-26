@@ -1,0 +1,60 @@
+const { Movie } = require("../models/movie");
+const { Genre } = require("../models/genre");
+const mongoose = require("mongoose");
+const express = require("express");
+const router = express.Router();
+
+router.get("/", async (req, res) => {
+  const movies = await Movie.find().sort("name");
+  res.send(movies);
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findById(req.params.id);
+
+    res.send(movie);
+  } catch (err) {
+    res.status(400).send("Could not find a movie with given ID");
+  }
+});
+
+// 60105f75df86e5322419cbd6
+router.post("/", async (req, res) => {
+  const genre = await Genre.findById(req.body.genreId);
+  if (!genre) return res.status(400).send("Invalid Genre ID");
+
+  let movie = new Movie({
+    title: req.body.title,
+    genre: {
+      _id: genre._id,
+      name: genre.name,
+    },
+    numberInStock: req.body.numberInStock,
+    dailyRentalRate: req.body.dailyRentalRate,
+  });
+  movie = await movie.save();
+  res.send(movie);
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.send(movie);
+  } catch (err) {
+    res.status(400).send("Invalid movie ID");
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findByIdAndRemove(req.params.id);
+    res.send(movie);
+  } catch (err) {
+    return res.status(400).send(err.message + " - Invalid ID");
+  }
+});
+
+module.exports = router;
