@@ -1,3 +1,5 @@
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi)
 const mongoose = require('mongoose');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
@@ -6,8 +8,8 @@ const rentals = require('./routes/rentals');
 const express = require('express');
 const app = express();
 
-mongoose.connect('mongodb://localhost/vidly', {useNewUrlParser: true}, { useUnifiedTopology: true })
-  .then(() => console.log('Connected with Vidly DataBase'))
+mongoose.connect('mongodb://localhost/moviezone', {useNewUrlParser: true}, { useUnifiedTopology: true })
+  .then(() => console.log('Connected with MovieZone DataBase'))
   .catch(err => console.error('Could not connect with mongoDB'));
 
 app.use(express.json());

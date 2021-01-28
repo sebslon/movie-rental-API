@@ -12,11 +12,9 @@
   "dependencies": {
     "@types/mongoose": "^5.10.3",
     "express": "^4.17.1",
+    "fawn": "^2.1.5",
     "joi": "^13.7.0",
+    "joi-objectid": "^3.0.1",
     "mongoose": "^5.11.13"
-  },
-  "devDependencies": {
-    "mongoose": "^5.11.13",
-    "@types/mongoose": "^5.10.3"
   }
 }
