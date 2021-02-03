@@ -12,13 +12,17 @@ const express = require('express');
 const app = express();
 
 require('./startup/prod')(app);
-
+console.log(config.get('db'));
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined');
   process.exit(1);
 }
 
-mongoose.connect('mongodb://localhost/moviezone', {useNewUrlParser: true}, { useUnifiedTopology: true })
+// mongoose.connect('mongodb://localhost/moviezone', {useNewUrlParser: true}, { useUnifiedTopology: true })
+//   .then(() => console.log('Connected with MovieZone DataBase'))
+//   .catch(err => console.error('Could not connect with mongoDB'));
+
+mongoose.connect(config.get('db'), {useNewUrlParser: true}, { useUnifiedTopology: true })
   .then(() => console.log('Connected with MovieZone DataBase'))
   .catch(err => console.error('Could not connect with mongoDB'));
 

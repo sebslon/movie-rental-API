@@ -2,3 +2,4 @@ node_modules
 customers-another.js
 todo.txt
 .env
+config/
