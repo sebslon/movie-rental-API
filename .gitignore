@@ -3,3 +3,6 @@ customers-another.js
 todo.txt
 .env
 config/
+logfile.log
+uncaught-exceptions.log
+uncaught-rejections.log

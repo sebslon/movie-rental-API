@@ -10,12 +10,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  try {
     const customer = await Customer.findById(req.params.id);
     res.send(customer);
-  } catch (err) {
-    res.status(404).send(err.message);
-  }
 });
 
 router.post("/", async (req, res) => {
@@ -33,23 +29,15 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", auth, async (req, res) => {
-  try {
     const customer = await Customer.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.send(customer);
-  } catch (err) {
-    res.status(404).send(err.message);
-  }
 });
 
 router.delete("/:id", auth, async (req, res) => {
-  try {
     const customer = await Customer.findByIdAndRemove(req.params.id);
     res.send(customer);
-  } catch (err) {
-    res.status(404).send(err.message);
-  }
 });
 
 module.exports = router;

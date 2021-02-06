@@ -11,12 +11,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  try {
     const movie = await Movie.findById(req.params.id);
     res.send(movie);
-  } catch (err) {
-    res.status(400).send("Could not find a movie with given ID");
-  }
 });
 
 // 60105f75df86e5322419cbd6
@@ -65,12 +61,8 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 router.delete("/:id", auth, async (req, res) => {
-  try {
     const movie = await Movie.findByIdAndRemove(req.params.id);
     res.send(movie);
-  } catch (err) {
-    return res.status(400).send(err.message + " - Invalid ID");
-  }
 });
 
 module.exports = router;
