@@ -4,14 +4,17 @@ const auth = require('../middleware/auth');
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const validateObjectId = require('../middleware/validateObjectId');
 
 router.get("/", async (req, res) => {
   const movies = await Movie.find().sort("name");
   res.send(movies);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
     const movie = await Movie.findById(req.params.id);
+    if(!movie) return res.status(404).send("Movie with given ID doesn't exist")
+
     res.send(movie);
 });
 

@@ -3,14 +3,17 @@ const auth = require('../middleware/auth');
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const validateObjectId = require('../middleware/validateObjectId');
 
 router.get("/", async (req, res) => {
   const customers = await Customer.find().sort("name");
   res.send(customers);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
     const customer = await Customer.findById(req.params.id);
+    if (!customer) return res.status(404).send('Customer with given ID was not found');
+
     res.send(customer);
 });
 
