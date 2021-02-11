@@ -1,4 +1,5 @@
 node_modules
+coverage
 customers-another.js
 todo.txt
 .env
