@@ -51,7 +51,7 @@ const Rental = mongoose.model(
     dateReturned: {
       type: Date,
     },
-    rentelFee: {
+    rentalFee: {
       type: Number,
       min: 0,
     },
